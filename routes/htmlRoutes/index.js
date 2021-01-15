@@ -15,6 +15,7 @@ router.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '../../public/notes.html'))
 });
 
+// * always goes as the last route
 router.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../../public/index.html'));
 });

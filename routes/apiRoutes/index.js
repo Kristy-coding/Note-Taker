@@ -1,6 +1,8 @@
 const path = require('path');
 const router = require('express').Router();
 const fs = require('fs');
+
+// to create unique id
 const { v4: uuidv4 } = require('uuid');
 
 const dbPath = path.join(__dirname,'../../db/db.json')
@@ -60,5 +62,39 @@ router.post('/api/notes',(req, res)=>{
     //DELETE /api/notes/:id should receive a query parameter containing the id of a note to delete. In order to delete a note, you'll need to read all notes from the db.json file, remove the note with the given id property, and then rewrite the notes to the db.json file.
 
     // deleteNote()
+router.delete('/api/notes/:id', (req, res)=> {
+    // the value of id = req.params.id (the key will be captured in :id)
+    chosen = req.params.id
+    // read all the notes from the db.json
+    fs.readFile(dbPath, 'utf8',(err, data) =>{
+        if (err) {
+            console.log(err)
+        }
+        // parse into js array
+        const notes = JSON.parse(data);
+        // notes is an array of notes 
+        //console.log(notes)
+        res.json(notes)
+        //remove the note with the given id property
+        for (let i =0; i < notes.length; i++) {
+            if (notes[i].id === chosen){
+            // array.splice(index, howmany, item1, ....., itemX) 
+            // I spliced the array at position/index [i] and removed one item (starting at index [i] therefore the notes at index [i] was removed) and splice will return the updated array
+                 notes.splice([i],1)
+                console.log(notes)
+                // rewrite the notes to the db.json file
+            fs.writeFile(dbPath, JSON.stringify(notes), (err) => {
+                if (err) throw err;
+                console.log('The file has been saved!');
+                // got a weird error when I had res.send() something about setting the header, changed it to res.end and it worked 
+                res.end()
+             });
+            }
+        }
+        
+    })
+    
+    
+})
 
     module.exports = router;
