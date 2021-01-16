@@ -1,6 +1,7 @@
 const path = require('path');
 const router = require('express').Router();
 
+// api routes will deal with json data, html routes will serve static files 
 //The following HTML routes should be created:
 
 //GET * should return the index.html file
