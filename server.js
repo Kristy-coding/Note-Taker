@@ -20,3 +20,8 @@ app.use(htmlRoutes)
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
   });
+
+
+  // use npx nodemon server 
+  // this commance will keep refeshing the browser everytime you make a change so you dont have to do it manually 
+  // cntl + C to stop the server from running 
