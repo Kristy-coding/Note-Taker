@@ -25,3 +25,9 @@ app.listen(PORT, () => {
   // use npx nodemon server 
   // this commance will keep refeshing the browser everytime you make a change so you dont have to do it manually 
   // cntl + C to stop the server from running 
+
+  // how to deploy on Heroku 
+  // make sure CLI is downloaded on local machine
+  // heroku create 
+  // git push heroku feature:main
+  // git push heroku main
